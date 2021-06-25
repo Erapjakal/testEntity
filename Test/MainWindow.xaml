@@ -1,0 +1,54 @@
+﻿<Window x:Class="Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Test"
+        xmlns:vm="clr-namespace:Test.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="450" Width="800"
+        >
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Alt" Key="Q" Command="{Binding CloseCurrentWindow}"/>
+    </Window.InputBindings>
+    <DockPanel Margin="3">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding GetProducts}"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <ProgressBar Value="{Binding ProgressBarCounter, UpdateSourceTrigger=PropertyChanged}" Width="75" Height="15"/>                
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding PriceCount}"/>
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl Margin="5">
+            <TabItem Header="Продукты">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <Button Content="Сохранить" Margin="3" Command="{Binding SaveDataBase}"/>
+                    </StackPanel>
+                    <DataGrid Grid.Column="1" ItemsSource="{Binding Продукты,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="Вес" Width="*" Binding="{Binding Weight}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Граждане"></TabItem>
+            <TabItem Header="Чек"></TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
