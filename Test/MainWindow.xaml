@@ -36,9 +36,15 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Vertical">
-                        <Button Content="Сохранить" Margin="3" Command="{Binding SaveDataBase}"/>
+                        <Button Content="Сохранить"
+                                Margin="3"
+                                Command="{Binding SaveDataBase}"/>
                     </StackPanel>
-                    <DataGrid Grid.Column="1" ItemsSource="{Binding Продукты,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+                    <DataGrid Grid.Column="1"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal"
+                              ItemsSource="{Binding Продукты,UpdateSourceTrigger=PropertyChanged}"
+                              AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Цена" Width="*" Binding="{Binding Price}"/>
